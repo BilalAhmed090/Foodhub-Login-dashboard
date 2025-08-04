@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Hub - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff8f0;
+            /* Creamy white background */
+            color: #2b2d42;
+            /* Dark charcoal for text */
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            /* For logout button positioning */
+        }
+
+        section {
+            padding: 40px 0;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1, h2, h3 {
+            color: #d62828;
+            /* Warm red for headings */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(214, 40, 40, 0.3), rgba(247, 127, 0, 0.3));
+            /* Red/Orange gradient */
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .menu-item {
+            background: #f1faee;
+            /* Mint white background */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid #e0e0e0;
+            /* Light gray border */
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .menu-item:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .menu-item:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .menu-item:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .menu-item:nth-child(4) {
+            animation-delay: 0.8s;
+        }
+
+        .menu-item:nth-child(5) {
+            animation-delay: 1.0s;
+        }
+
+        .menu-item:nth-child(6) {
+            animation-delay: 1.2s;
+        }
+
+        .menu-item:nth-child(7) {
+            animation-delay: 1.4s;
+        }
+
+        .menu-item:nth-child(8) {
+            animation-delay: 1.6s;
+        }
+
+        .menu-item:nth-child(9) {
+            animation-delay: 1.8s;
+        }
+
+        .menu-item:nth-child(10) {
+            animation-delay: 2.0s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(214, 40, 40, 0.2);
+            /* Warm red shadow */
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-content {
+            padding: 20px;
+        }
+
+        .price {
+            color: #f77f00;
+            /* Spicy orange for prices */
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            display: inline-block;
+            background: rgba(247, 127, 0, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* Food Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-tab {
+            padding: 10px 20px;
+            background: #f1faee;
+            /* Mint white */
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            font-weight: 500;
+            color: #2b2d42;
+            /* Dark charcoal */
+        }
+
+        .category-tab.active {
+            background: #d62828;
+            /* Warm red */
+            color: white;
+        }
+
+        .category-tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-card {
+            background: #f1faee;
+            /* Mint white */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(214, 40, 40, 0.2);
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: #f77f00;
+            /* Spicy orange */
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.1);
+        }
+
+        /* Social Media */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: #2b2d42;
+            font-size: 1.8rem;
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #f1faee;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: white;
+            background: #d62828;
+            box-shadow: 0 10px 20px rgba(214, 40, 40, 0.3);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #d62828;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.3);
+            z-index: 999;
+            border: none;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #f77f00;
+            /* Spicy orange on hover */
+            transform: translateY(-5px);
+        }
+
+        /* Special Offer Banner */
+        .offer-banner {
+            background: linear-gradient(to right, #d62828, #f77f00);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.3);
+        }
+
+        /* Logout Button */
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #d62828;
+            /* Warm red */
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .logout-btn:hover {
+            background: #f77f00;
+            /* Spicy orange on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 80px 20px;
+            }
+
+            .category-tabs {
+                gap: 10px;
+            }
+
+            .category-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logout Button -->
+        <a href="index.html" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 style="color: white; font-size: 3rem; margin-bottom: 15px;">Welcome to Food Hub</h1>
+                <p style="font-size: 1.3rem; margin-top: 10px;">Discover our delicious international cuisine</p>
+            </div>
+        </section>
+
+        <!-- Special Offer -->
+        <div class="offer-banner">
+            <h4><i class="fas fa-star"></i> TODAY'S SPECIAL: 20% OFF ON BURGERS & BIRYANI <i class="fas fa-star"></i></h4>
+        </div>
+
+        <!-- Menu Section -->
+        <section>
+            <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 15px;">Our Menu</h2>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">Explore our wide variety of delicious meals from around the world made with love and the freshest ingredients</p>
+
+            <!-- Category Tabs -->
+            <div class="category-tabs">
+                <div class="category-tab active" onclick="filterMenu('all')">All</div>
+                <div class="category-tab" onclick="filterMenu('fast-food')">Fast Food</div>
+                <div class="category-tab" onclick="filterMenu('pakistani')">Pakistani</div>
+                <div class="category-tab" onclick="filterMenu('chinese')">Chinese</div>
+                <div class="category-tab" onclick="filterMenu('continental')">Continental</div>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Fast Food Items -->
+                <div class="menu-item" data-category="fast-food">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3" alt="Burger">
+                    <div class="menu-item-content">
+                        <h3>Classic Burger</h3>
+                        <p>Juicy beef patty with lettuce, tomato, onion, pickles, and our special sauce on a toasted brioche bun</p>
+                        <div class="price">$9.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.49</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="chinese">
+                    <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3" alt="Fries">
+                    <div class="menu-item-content">
+                        <h3>Shrimp Rice</h3>
+                        <p>Crispy golden fries topped with spicy garlic butter shrimp, drizzled with zesty mayo and herbs.</p>
+                        <div class="price">$4.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$6.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="continental">
+                    <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3" alt="Hot Dog">
+                    <div class="menu-item-content">
+                        <h3>Premium Mix Salad</h3>
+                        <p>A refreshing blend of crisp lettuce, cherry tomatoes, cucumbers, olives, corn, grilled chicken, and creamy feta — topped with a tangy vinaigrette.</p>
+                        <div class="price">$7.49 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$9.99</span></div>
+                    </div>
+                </div>
+
+                <!-- Pakistani Items -->
+                <div class="menu-item" data-category="pakistani">
+                    <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?ixlib=rb-4.0.3" alt="Biryani">
+                    <div class="menu-item-content">
+                        <h3>Chicken Biryani</h3>
+                        <p>Fragrant basmati rice cooked with tender chicken pieces, aromatic spices, and caramelized onions</p>
+                        <div class="price">$11.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="pakistani">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3" alt="Samosa">
+                    <div class="menu-item-content">
+                        <h3>Spicy Samosa</h3>
+                        <p>Golden-fried pastry filled with spicy mashed potatoes, peas, and traditional desi spices. Served hot with mint chutney.</p>
+                        <div class="price">$13.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$24.99</span></div>
+                    </div>
+                </div>
+
+                <!-- Chinese Items -->
+                <div class="menu-item" data-category="chinese">
+                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3" alt="Dumplings">
+                    <div class="menu-item-content">
+                        <h3>Kung Pao Chicken</h3>
+                        <p>Spicy stir-fry with chicken, peanuts, vegetables, and chili peppers in a savory sauce</p>
+                        <div class="price">$8.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$10.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="chinese">
+                    <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3" alt="Kung Pao">
+                    <div class="menu-item-content">
+                        <h3>Steamed Dumplings</h3>
+                        <p>Delicate dumplings filled with minced pork, shrimp, and vegetables, served with soy-vinegar dip</p>
+                        <div class="price">$12.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$15.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="chinese">
+                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3" alt="Fried Rice">
+                    <div class="menu-item-content">
+                        <h3>Yangzhou Fried Rice</h3>
+                        <p>Classic fried rice with shrimp, ham, eggs, and mixed vegetables, wok-tossed to perfection</p>
+                        <div class="price">$10.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$14.99</span></div>
+                    </div>
+                </div>
+
+                <!-- Continental Items -->
+                <div class="menu-item" data-category="continental">
+                    <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?ixlib=rb-4.0.3" alt="Pasta">
+                    <div class="menu-item-content">
+                        <h3>Creamy Pasta</h3>
+                        <p>Penne pasta with wild mushrooms, cream, garlic, white wine, and aged parmesan cheese</p>
+                        <div class="price">$11.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$19.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="continental">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3" alt="Steak">
+                    <div class="menu-item-content">
+                        <h3>Grilled Ribeye Steak</h3>
+                        <p>12oz USDA prime ribeye, grilled to perfection, served with roasted potatoes and seasonal vegetables</p>
+                        <div class="price">$24.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$34.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="continental">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3" alt="Pizza">
+                    <div class="menu-item-content">
+                        <h3>Margherita Pizza</h3>
+                        <p>Classic pizza with San Marzano tomato sauce, fresh mozzarella, basil, and a drizzle of olive oil</p>
+                        <div class="price">$12.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$14.99</span></div>
+                    </div>
+                </div>
+
+                <!-- Additional Items -->
+                <div class="menu-item" data-category="pakistani">
+                    <img src="https://images.unsplash.com/photo-1603105037880-880cd4edfb0d?ixlib=rb-4.0.3" alt="Haleem">
+                    <div class="menu-item-content">
+                        <h3>Hot & Sour Soup</h3>
+                        <p>Spicy and tangy soup with mushrooms, tofu, bamboo shoots, and eggs in a flavorful broth</p>
+                        <div class="price">$10.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="chinese">
+                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3" alt="Soup">
+                    <div class="menu-item-content">
+                        <h3>Xongli Fried Spaghetti</h3>
+                        <p>Crispy stir-fried spaghetti tossed with veggies, chili garlic sauce, and spices. A fusion twist with bold flavors!</p>
+                        <div class="price">$6.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$8.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="continental">
+                    <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3" alt="Fries">
+                    <div class="menu-item-content">
+                        <h3>Rice</h3>
+                        <p>Crispy golden fries topped with spicy garlic butter shrimp, drizzled with zesty mayo and herbs.</p>
+                        <div class="price">$4.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$6.99</span></div>
+                    </div>
+                </div>
+
+                <div class="menu-item" data-category="continental">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3" alt="Dessert">
+                    <div class="menu-item-content">
+                        <h3>Chocolate Lava Cake</h3>
+                        <p>Warm chocolate cake with a molten center, served with vanilla ice cream and fresh berries</p>
+                        <div class="price">$6.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$10.00</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section>
+            <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 15px;">Contact Us</h2>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">We'd love to hear from you! Reach out for reservations, catering, or just to say hello</p>
+
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+1 (555) 123-4567</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">Mon-Fri: 9am-10pm</p>
+                </div>
+
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>contact@foodhub.com</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">Response within 24 hours</p>
+                </div>
+
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Address</h3>
+                    <p>123 Food Street</p>
+                    <p>Foodville, FC 12345</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem;">Free parking available</p>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div style="text-align: center; margin-top: 40px;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Follow Our Food Journey</h3>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Back to Top Button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('active');
+            } else {
+                backToTopBtn.classList.remove('active');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Filter Menu Function
+        function filterMenu(category) {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const tabs = document.querySelectorAll('.category-tab');
+
+            // Update active tab
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.textContent.toLowerCase() === category ||
+                    (tab.textContent === 'All' && category === 'all')) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Show/hide menu items
+            menuItems.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate menu items on scroll
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            menuItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // Add hover effect to hero section
+            const hero = document.querySelector('.hero');
+            hero.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                hero.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+
+            hero.addEventListener('mouseenter', () => {
+                hero.style.transition = 'all 0.5s ease';
+            });
+
+            hero.addEventListener('mouseleave', () => {
+                hero.style.transform = 'rotateY(0deg) rotateX(0deg)';
+                hero.style.transition = 'all 1s ease';
+            });
+        });
+    </script>
+</body>
+
+</html>

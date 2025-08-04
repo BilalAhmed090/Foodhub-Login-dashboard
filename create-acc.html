@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Hub - Create Account</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Auth Container */
+        .auth-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .auth-container:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Header */
+        .auth-header {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            padding: 25px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            margin-right: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Styles */
+        .auth-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ff416c;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+
+        .form-control:focus {
+            border-color: #ff416c;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 65, 108, 0.2);
+            background-color: white;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Links */
+        .auth-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .auth-link {
+            color: #ff416c;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .auth-link:hover {
+            color: #ff4b2b;
+        }
+
+        .auth-link:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: #ff416c;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .auth-link:hover:after {
+            transform: scaleX(1);
+        }
+
+        /* Food Decorations */
+        .food-decoration {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .burger-decoration {
+            width: 100px;
+            bottom: -30px;
+            right: -30px;
+            animation-delay: 0.5s;
+        }
+
+        .fries-decoration {
+            width: 80px;
+            top: 50px;
+            left: -20px;
+            animation-delay: 1s;
+        }
+
+        .drink-decoration {
+            width: 60px;
+            top: 150px;
+            right: -15px;
+            animation-delay: 1.5s;
+        }
+
+        .pizza-decoration {
+            width: 90px;
+            bottom: 100px;
+            left: -40px;
+            animation-delay: 2s;
+        }
+
+        /* Animations */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 500px) {
+            .auth-container {
+                max-width: 100%;
+            }
+
+            .food-decoration {
+                opacity: 0.5;
+            }
+
+            .burger-decoration {
+                width: 80px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .fries-decoration {
+                width: 60px;
+                top: 30px;
+                left: -15px;
+            }
+
+            .auth-header {
+                padding: 20px;
+            }
+
+            .logo h1 {
+                font-size: 1.7rem;
+            }
+
+            .auth-form {
+                padding: 20px;
+            }
+        }
+
+        /* Floating Bubbles Background */
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: rise 15s infinite ease-in;
+        }
+
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            left: 10%;
+            animation-duration: 8s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 20px;
+            height: 20px;
+            left: 20%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            left: 35%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 80px;
+            height: 80px;
+            left: 50%;
+            animation-duration: 11s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 35px;
+            height: 35px;
+            left: 55%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(6) {
+            width: 45px;
+            height: 45px;
+            left: 65%;
+            animation-duration: 8s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(7) {
+            width: 25px;
+            height: 25px;
+            left: 75%;
+            animation-duration: 7s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(8) {
+            width: 80px;
+            height: 80px;
+            left: 80%;
+            animation-duration: 6s;
+            animation-delay: 1s;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -100px;
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(100px);
+            }
+
+            100% {
+                bottom: 1080px;
+                transform: translateX(-200px);
+            }
+        }
+
+        .btn {
+            
+            border-style: initial;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ff5733;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Bubbles Background -->
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-header">
+            <div class="logo">
+                <i class="fas fa-hamburger"></i>
+                <h1>Food Hub</h1>
+            </div>
+            <p>Create your account to get started!</p>
+        </div>
+
+        <div class="auth-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <div class="input-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <input type="text" id="name" class="form-control" placeholder="Your full name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <input type="email" id="email" class="form-control" placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <div class="input-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <input type="tel" id="phone" class="form-control" placeholder="+1 (123) 456-7890">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <input type="password" id="password" class="form-control" placeholder="Create password">
+            </div>
+
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="input-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password">
+            </div>
+            <a href="dashboard.html" class="btn">Create Account</a>
+
+
+            <div class="auth-links">
+                <span>Already have an account? </span>
+                <a href="index.html" class="auth-link">Sign In</a>
+            </div>
+        </div>
+
+        <!-- Food Decorations (positioned to not interfere with form) -->
+        <img src="https://cdn-icons-png.flaticon.com/512/5787/5787100.png" class="food-decoration burger-decoration"
+            alt="Burger">
+        <img src="https://cdn-icons-png.flaticon.com/512/2718/2718224.png" class="food-decoration fries-decoration"
+            alt="Fries">
+        <img src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png" class="food-decoration drink-decoration"
+            alt="Drink">
+        <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" class="food-decoration pizza-decoration"
+            alt="Pizza">
+    </div>
+
+    <script>
+        // Make all interactive elements work
+        document.addEventListener('DOMContentLoaded', function () {
+            // Register button functionality
+            document.getElementById('register-btn').addEventListener('click', function () {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+
+                // Basic validation
+                if (!name || !email || !phone || !password || !confirmPassword) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+
+                if (!email.includes('@')) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    alert('Password should be at least 6 characters');
+                    return;
+                }
+
+                // In a real app, you would send this data to your backend
+                alert('Account created successfully! Redirecting to login...');
+
+                // Redirect to login page after successful registration
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            });
+
+            // Add focus styles when clicking inputs
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function () {
+                    this.parentElement.querySelector('.input-icon i').style.color = '#ff4b2b';
+                });
+
+                input.addEventListener('blur', function () {
+                    this.parentElement.querySelector('.input-icon i').style.color = '#ff416c';
+                });
+            });
+
+            // Add some fun animation to the register button on hover
+            const registerBtn = document.getElementById('register-btn');
+            registerBtn.addEventListener('mouseenter', function () {
+                this.style.background = 'linear-gradient(to right, #ff4b2b, #ff416c)';
+            });
+
+            registerBtn.addEventListener('mouseleave', function () {
+                this.style.background = 'linear-gradient(to right, #ff416c, #ff4b2b)';
+            });
+
+            // Allow pressing Enter key to register
+            document.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('register-btn').click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
