@@ -16,10 +16,10 @@
 
         body {
             background: #fff8f0;
-            /* Creamy white background */
             color: #2b2d42;
-            /* Dark charcoal for text */
             min-height: 100vh;
+            position: relative;
+            padding-bottom: 80px;
         }
 
         .container {
@@ -27,7 +27,6 @@
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            /* For logout button positioning */
         }
 
         section {
@@ -37,8 +36,244 @@
 
         h1, h2, h3 {
             color: #d62828;
-            /* Warm red for headings */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Profile Dropdown */
+        .profile-dropdown {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .profile-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #d62828;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            overflow: hidden;
+        }
+
+        .profile-btn:hover {
+            background: #f77f00;
+            transform: scale(1.1);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 220px;
+            overflow: hidden;
+            display: none;
+            animation: fadeInUp 0.3s ease-out;
+            z-index: 1001;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2b2d42;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: #f1faee;
+            color: #d62828;
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #eee;
+            margin: 5px 0;
+        }
+
+        /* Footer */
+        footer {
+            background: #2b2d42;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Password Change Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: #d62828;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #f77f00;
+        }
+
+        .cancel-btn {
+            background: #f1faee;
+            color: #2b2d42;
+        }
+
+        .cancel-btn:hover {
+            background: #e0e0e0;
+        }
+
+        /* Password Validation Styles */
+        .modal-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #ccc !important;
+        }
+
+        .password-error {
+            color: #d62828;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .password-success {
+            color: #4CAF50;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .password-hint {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Success Message */
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+        .success-message {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            color: #2b2d42;
+            margin-bottom: 10px;
+        }
+
+        .success-message p {
+            color: #666;
         }
 
         /* Hero Section */
@@ -64,7 +299,6 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(45deg, rgba(214, 40, 40, 0.3), rgba(247, 127, 0, 0.3));
-            /* Red/Orange gradient */
             z-index: 0;
         }
 
@@ -83,61 +317,18 @@
 
         .menu-item {
             background: #f1faee;
-            /* Mint white background */
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
             border: 1px solid #e0e0e0;
-            /* Light gray border */
             animation: fadeInUp 0.6s ease-out;
             animation-fill-mode: both;
-        }
-
-        .menu-item:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-
-        .menu-item:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-
-        .menu-item:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        .menu-item:nth-child(4) {
-            animation-delay: 0.8s;
-        }
-
-        .menu-item:nth-child(5) {
-            animation-delay: 1.0s;
-        }
-
-        .menu-item:nth-child(6) {
-            animation-delay: 1.2s;
-        }
-
-        .menu-item:nth-child(7) {
-            animation-delay: 1.4s;
-        }
-
-        .menu-item:nth-child(8) {
-            animation-delay: 1.6s;
-        }
-
-        .menu-item:nth-child(9) {
-            animation-delay: 1.8s;
-        }
-
-        .menu-item:nth-child(10) {
-            animation-delay: 2.0s;
         }
 
         .menu-item:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(214, 40, 40, 0.2);
-            /* Warm red shadow */
         }
 
         .menu-item img {
@@ -157,7 +348,6 @@
 
         .price {
             color: #f77f00;
-            /* Spicy orange for prices */
             font-weight: bold;
             font-size: 1.2rem;
             margin: 10px 0;
@@ -179,19 +369,16 @@
         .category-tab {
             padding: 10px 20px;
             background: #f1faee;
-            /* Mint white */
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             font-weight: 500;
             color: #2b2d42;
-            /* Dark charcoal */
         }
 
         .category-tab.active {
             background: #d62828;
-            /* Warm red */
             color: white;
         }
 
@@ -210,7 +397,6 @@
 
         .contact-card {
             background: #f1faee;
-            /* Mint white */
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -227,7 +413,6 @@
         .contact-card i {
             font-size: 2.5rem;
             color: #f77f00;
-            /* Spicy orange */
             margin-bottom: 15px;
             transition: all 0.3s ease;
         }
@@ -296,7 +481,6 @@
 
         .back-to-top:hover {
             background: #f77f00;
-            /* Spicy orange on hover */
             transform: translateY(-5px);
         }
 
@@ -309,35 +493,6 @@
             text-align: center;
             margin: 20px 0;
             box-shadow: 0 5px 15px rgba(214, 40, 40, 0.3);
-        }
-
-        /* Logout Button */
-        .logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            background: #d62828;
-            /* Warm red */
-            color: white;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 1000;
-            text-decoration: none;
-        }
-
-        .logout-btn:hover {
-            background: #f77f00;
-            /* Spicy orange on hover */
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(214, 40, 40, 0.2);
         }
 
         /* Animations */
@@ -393,21 +548,92 @@
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
+
+            .profile-dropdown {
+                top: 15px;
+                right: 15px;
+            }
+
+            .profile-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .dropdown-menu {
+                top: 50px;
+                width: 180px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Logout Button -->
-        <a href="index.html" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown">
+            <button class="profile-btn">
+                <i class="fas fa-user"></i>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" class="dropdown-item" id="changePasswordBtn">
+                    <i class="fas fa-key"></i> Change Password
+                </a>
+                <a href="index.html" class="dropdown-item">
+                    <i class="fas fa-user-plus"></i> Sign Up Page
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="index.html" class="dropdown-item">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+        </div>
 
         <!-- Back to Top Button -->
         <button class="back-to-top" id="backToTop">
             <i class="fas fa-arrow-up"></i>
         </button>
+
+        <!-- Password Change Modal -->
+        <div class="modal" id="passwordModal">
+            <div class="modal-content">
+                <h2>Change Password</h2>
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" required maxlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" required maxlength="8">
+                        <small class="password-hint">(Minimum 6 characters)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" required maxlength="8">
+                        <small class="password-hint">(Minimum 6 characters)</small>
+                        <div id="passwordMatchMessage" class="password-error">
+                            <i class="fas fa-exclamation-circle"></i> Passwords do not match
+                        </div>
+                        <div id="passwordSuccessMessage" class="password-success">
+                            <i class="fas fa-check-circle"></i> Passwords match
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="modal-btn cancel-btn" id="cancelPassword">Cancel</button>
+                        <button type="submit" class="modal-btn submit-btn" id="submitPasswordBtn" disabled>Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Success Message Overlay -->
+        <div class="success-overlay" id="successOverlay">
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h3>Password Changed Successfully!</h3>
+                <p>You will be redirected back to the dashboard.</p>
+            </div>
+        </div>
 
         <!-- Hero Section -->
         <section class="hero">
@@ -419,13 +645,15 @@
 
         <!-- Special Offer -->
         <div class="offer-banner">
-            <h4><i class="fas fa-star"></i> TODAY'S SPECIAL: 20% OFF ON BURGERS & BIRYANI <i class="fas fa-star"></i></h4>
+            <h4><i class="fas fa-star"></i> TODAY'S SPECIAL: 20% OFF ON BURGERS & BIRYANI <i class="fas fa-star"></i>
+            </h4>
         </div>
 
         <!-- Menu Section -->
         <section>
             <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 15px;">Our Menu</h2>
-            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">Explore our wide variety of delicious meals from around the world made with love and the freshest ingredients</p>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">Explore our wide
+                variety of delicious meals from around the world made with love and the freshest ingredients</p>
 
             <!-- Category Tabs -->
             <div class="category-tabs">
@@ -442,8 +670,11 @@
                     <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3" alt="Burger">
                     <div class="menu-item-content">
                         <h3>Classic Burger</h3>
-                        <p>Juicy beef patty with lettuce, tomato, onion, pickles, and our special sauce on a toasted brioche bun</p>
-                        <div class="price">$9.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.49</span></div>
+                        <p>Juicy beef patty with lettuce, tomato, onion, pickles, and our special sauce on a toasted
+                            brioche bun</p>
+                        <div class="price">$9.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.49</span>
+                        </div>
                     </div>
                 </div>
 
@@ -451,8 +682,11 @@
                     <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3" alt="Fries">
                     <div class="menu-item-content">
                         <h3>Shrimp Rice</h3>
-                        <p>Crispy golden fries topped with spicy garlic butter shrimp, drizzled with zesty mayo and herbs.</p>
-                        <div class="price">$4.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$6.99</span></div>
+                        <p>Crispy golden fries topped with spicy garlic butter shrimp, drizzled with zesty mayo and
+                            herbs.</p>
+                        <div class="price">$4.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$6.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -460,18 +694,25 @@
                     <img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3" alt="Hot Dog">
                     <div class="menu-item-content">
                         <h3>Premium Mix Salad</h3>
-                        <p>A refreshing blend of crisp lettuce, cherry tomatoes, cucumbers, olives, corn, grilled chicken, and creamy feta — topped with a tangy vinaigrette.</p>
-                        <div class="price">$7.49 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$9.99</span></div>
+                        <p>A refreshing blend of crisp lettuce, cherry tomatoes, cucumbers, olives, corn, grilled
+                            chicken, and creamy feta — topped with a tangy vinaigrette.</p>
+                        <div class="price">$7.49 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$9.99</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Pakistani Items -->
                 <div class="menu-item" data-category="pakistani">
-                    <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?ixlib=rb-4.0.3" alt="Biryani">
+                    <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?ixlib=rb-4.0.3"
+                        alt="Biryani">
                     <div class="menu-item-content">
                         <h3>Chicken Biryani</h3>
-                        <p>Fragrant basmati rice cooked with tender chicken pieces, aromatic spices, and caramelized onions</p>
-                        <div class="price">$11.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.99</span></div>
+                        <p>Fragrant basmati rice cooked with tender chicken pieces, aromatic spices, and caramelized
+                            onions</p>
+                        <div class="price">$11.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -479,18 +720,24 @@
                     <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-4.0.3" alt="Samosa">
                     <div class="menu-item-content">
                         <h3>Spicy Samosa</h3>
-                        <p>Golden-fried pastry filled with spicy mashed potatoes, peas, and traditional desi spices. Served hot with mint chutney.</p>
-                        <div class="price">$13.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$24.99</span></div>
+                        <p>Golden-fried pastry filled with spicy mashed potatoes, peas, and traditional desi spices.
+                            Served hot with mint chutney.</p>
+                        <div class="price">$13.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$24.99</span>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Chinese Items -->
                 <div class="menu-item" data-category="chinese">
-                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3" alt="Dumplings">
+                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3"
+                        alt="Dumplings">
                     <div class="menu-item-content">
                         <h3>Kung Pao Chicken</h3>
                         <p>Spicy stir-fry with chicken, peanuts, vegetables, and chili peppers in a savory sauce</p>
-                        <div class="price">$8.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$10.99</span></div>
+                        <div class="price">$8.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$10.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -498,17 +745,23 @@
                     <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3" alt="Kung Pao">
                     <div class="menu-item-content">
                         <h3>Steamed Dumplings</h3>
-                        <p>Delicate dumplings filled with minced pork, shrimp, and vegetables, served with soy-vinegar dip</p>
-                        <div class="price">$12.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$15.99</span></div>
+                        <p>Delicate dumplings filled with minced pork, shrimp, and vegetables, served with soy-vinegar
+                            dip</p>
+                        <div class="price">$12.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$15.99</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="menu-item" data-category="chinese">
-                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3" alt="Fried Rice">
+                    <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3"
+                        alt="Fried Rice">
                     <div class="menu-item-content">
                         <h3>Yangzhou Fried Rice</h3>
                         <p>Classic fried rice with shrimp, ham, eggs, and mixed vegetables, wok-tossed to perfection</p>
-                        <div class="price">$10.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$14.99</span></div>
+                        <div class="price">$10.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$14.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -518,7 +771,9 @@
                     <div class="menu-item-content">
                         <h3>Creamy Pasta</h3>
                         <p>Penne pasta with wild mushrooms, cream, garlic, white wine, and aged parmesan cheese</p>
-                        <div class="price">$11.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$19.99</span></div>
+                        <div class="price">$11.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$19.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -526,8 +781,11 @@
                     <img src="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3" alt="Steak">
                     <div class="menu-item-content">
                         <h3>Grilled Ribeye Steak</h3>
-                        <p>12oz USDA prime ribeye, grilled to perfection, served with roasted potatoes and seasonal vegetables</p>
-                        <div class="price">$24.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$34.99</span></div>
+                        <p>12oz USDA prime ribeye, grilled to perfection, served with roasted potatoes and seasonal
+                            vegetables</p>
+                        <div class="price">$24.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$34.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -535,8 +793,11 @@
                     <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3" alt="Pizza">
                     <div class="menu-item-content">
                         <h3>Margherita Pizza</h3>
-                        <p>Classic pizza with San Marzano tomato sauce, fresh mozzarella, basil, and a drizzle of olive oil</p>
-                        <div class="price">$12.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$14.99</span></div>
+                        <p>Classic pizza with San Marzano tomato sauce, fresh mozzarella, basil, and a drizzle of olive
+                            oil</p>
+                        <div class="price">$12.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$14.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -546,7 +807,9 @@
                     <div class="menu-item-content">
                         <h3>Hot & Sour Soup</h3>
                         <p>Spicy and tangy soup with mushrooms, tofu, bamboo shoots, and eggs in a flavorful broth</p>
-                        <div class="price">$10.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.99</span></div>
+                        <div class="price">$10.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$12.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -554,8 +817,11 @@
                     <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?ixlib=rb-4.0.3" alt="Soup">
                     <div class="menu-item-content">
                         <h3>Xongli Fried Spaghetti</h3>
-                        <p>Crispy stir-fried spaghetti tossed with veggies, chili garlic sauce, and spices. A fusion twist with bold flavors!</p>
-                        <div class="price">$6.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$8.99</span></div>
+                        <p>Crispy stir-fried spaghetti tossed with veggies, chili garlic sauce, and spices. A fusion
+                            twist with bold flavors!</p>
+                        <div class="price">$6.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$8.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -563,8 +829,11 @@
                     <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?ixlib=rb-4.0.3" alt="Fries">
                     <div class="menu-item-content">
                         <h3>Rice</h3>
-                        <p>Crispy golden fries topped with spicy garlic butter shrimp, drizzled with zesty mayo and herbs.</p>
-                        <div class="price">$4.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$6.99</span></div>
+                        <p>Crispy golden fries topped with spicy garlic butter shrimp, drizzled with zesty mayo and
+                            herbs.</p>
+                        <div class="price">$4.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$6.99</span>
+                        </div>
                     </div>
                 </div>
 
@@ -573,7 +842,9 @@
                     <div class="menu-item-content">
                         <h3>Chocolate Lava Cake</h3>
                         <p>Warm chocolate cake with a molten center, served with vanilla ice cream and fresh berries</p>
-                        <div class="price">$6.99 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$10.00</span></div>
+                        <div class="price">$6.99 <span
+                                style="text-decoration: line-through; color: #999; font-size: 0.9rem;">$10.00</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -582,7 +853,8 @@
         <!-- Contact Section -->
         <section>
             <h2 style="font-size: 2.2rem; text-align: center; margin-bottom: 15px;">Contact Us</h2>
-            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">We'd love to hear from you! Reach out for reservations, catering, or just to say hello</p>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px;">We'd love to hear
+                from you! Reach out for reservations, catering, or just to say hello</p>
 
             <div class="contact-info">
                 <div class="contact-card">
@@ -622,11 +894,17 @@
         </section>
     </div>
 
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Food Hub. All Rights Reserved.</p>
+        <p>Created with ❤️ by the creative team at Krytix</p>
+    </footer>
+
     <script>
         // Back to Top Button functionality
         const backToTopBtn = document.getElementById('backToTop');
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             if (window.pageYOffset > 300) {
                 backToTopBtn.classList.add('active');
             } else {
@@ -634,7 +912,7 @@
             }
         });
 
-        backToTopBtn.addEventListener('click', function() {
+        backToTopBtn.addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -665,8 +943,140 @@
             });
         }
 
+        // Profile Dropdown
+        const profileBtn = document.querySelector('.profile-btn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        profileBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function () {
+            dropdownMenu.classList.remove('active');
+        });
+
+        // Password Validation Functionality
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const currentPassword = document.getElementById('currentPassword');
+        const passwordMatchMessage = document.getElementById('passwordMatchMessage');
+        const passwordSuccessMessage = document.getElementById('passwordSuccessMessage');
+        const submitPasswordBtn = document.getElementById('submitPasswordBtn');
+
+        function validatePasswords() {
+            const newPass = newPassword.value;
+            const confirmPass = confirmPassword.value;
+            const currentPass = currentPassword.value;
+            
+            // Check if current password is filled
+            if (!currentPass) {
+                submitPasswordBtn.disabled = true;
+                return;
+            }
+            
+            // Check if passwords match and meet length requirement
+            if (newPass && confirmPass) {
+                if (newPass === confirmPass && newPass.length >= 6) {
+                    passwordMatchMessage.style.display = 'none';
+                    passwordSuccessMessage.style.display = 'block';
+                    submitPasswordBtn.disabled = false;
+                } else {
+                    if (newPass.length < 6) {
+                        passwordMatchMessage.textContent = 'Password must be at least 6 characters';
+                    } else {
+                        passwordMatchMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Passwords do not match';
+                    }
+                    passwordMatchMessage.style.display = 'block';
+                    passwordSuccessMessage.style.display = 'none';
+                    submitPasswordBtn.disabled = true;
+                }
+            } else {
+                passwordMatchMessage.style.display = 'none';
+                passwordSuccessMessage.style.display = 'none';
+                submitPasswordBtn.disabled = true;
+            }
+        }
+
+        // Add event listeners for real-time validation
+        newPassword.addEventListener('input', validatePasswords);
+        confirmPassword.addEventListener('input', validatePasswords);
+        currentPassword.addEventListener('input', validatePasswords);
+
+        // Password Change Modal
+        const passwordModal = document.getElementById('passwordModal');
+        const changePasswordBtn = document.getElementById('changePasswordBtn');
+        const cancelPassword = document.getElementById('cancelPassword');
+        const passwordForm = document.getElementById('passwordForm');
+        const successOverlay = document.getElementById('successOverlay');
+
+        changePasswordBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            dropdownMenu.classList.remove('active');
+            passwordModal.style.display = 'flex';
+        });
+
+        cancelPassword.addEventListener('click', function () {
+            passwordModal.style.display = 'none';
+            passwordForm.reset();
+            passwordMatchMessage.style.display = 'none';
+            passwordSuccessMessage.style.display = 'none';
+            submitPasswordBtn.disabled = true;
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function (event) {
+            if (event.target === passwordModal) {
+                passwordModal.style.display = 'none';
+                passwordForm.reset();
+                passwordMatchMessage.style.display = 'none';
+                passwordSuccessMessage.style.display = 'none';
+                submitPasswordBtn.disabled = true;
+            }
+        });
+
+        // Form submission
+        passwordForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const currentPasswordVal = currentPassword.value;
+            const newPasswordVal = newPassword.value;
+            const confirmPasswordVal = confirmPassword.value;
+
+            // Final validation check
+            if (newPasswordVal !== confirmPasswordVal) {
+                passwordMatchMessage.style.display = 'block';
+                passwordSuccessMessage.style.display = 'none';
+                return;
+            }
+
+            if (newPasswordVal.length < 6) {
+                passwordMatchMessage.textContent = 'Password must be at least 6 characters';
+                passwordMatchMessage.style.display = 'block';
+                return;
+            }
+
+            // Show success overlay
+            successOverlay.style.display = 'flex';
+
+            // Close the modal
+            passwordModal.style.display = 'none';
+            passwordForm.reset();
+            submitPasswordBtn.disabled = true;
+
+            // Hide messages
+            passwordMatchMessage.style.display = 'none';
+            passwordSuccessMessage.style.display = 'none';
+
+            // Redirect to dashboard after 2 seconds
+            setTimeout(function () {
+                window.location.href = "dashboard.html";
+            }, 2000);
+        });
+
         // Add some interactive animations
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Animate menu items on scroll
             const menuItems = document.querySelectorAll('.menu-item');
 
@@ -701,5 +1111,4 @@
         });
     </script>
 </body>
-
 </html>
